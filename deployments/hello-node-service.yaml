@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-app
+spec:
+  type: LoadBalancer
+  selector:
+    app: node-app
+  ports:
+    - protocol: TCP
+      port: 8080   # Puerto del servicio
+      targetPort: 8080 # Puerto del contenedor
+      nodePort: 30007

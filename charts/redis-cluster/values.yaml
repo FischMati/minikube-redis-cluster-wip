@@ -1,0 +1,61 @@
+cluster:
+  enabled: true
+  slaveCount: 2
+
+networkPolicy:
+  enabled: false
+
+usePassword: false # Desactivar autenticación para simplificar
+
+networkHost: "0.0.0.0"
+
+# Use Pod IPs for cluster communication
+clusterDomain: "cluster.local"
+
+# Set the advertise IPs to the pod IPs
+extraEnvVars:
+  - name: REDIS_EXTRA_FLAGS
+    value: "--cluster-announce-ip $(POD_IP)"
+
+podManagementPolicy: "Parallel"
+
+service:
+  type: ClusterIP
+
+rbac:
+  create: true
+
+serviceAccount:
+  create: true
+
+
+persistence:
+  enabled: true
+  storageClass: "standard"
+  size: 8Gi
+
+livenessProbe:
+  enabled: true
+  exec:
+    command:
+      - sh
+      - -c
+      - redis-cli -h $(HOSTNAME) -p $REDIS_PORT_NUMBER ping
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  successThreshold: 1
+  failureThreshold: 5
+
+readinessProbe:
+  enabled: true
+  exec:
+    command:
+      - sh
+      - -c
+      - redis-cli -h $(HOSTNAME) -p $REDIS_PORT_NUMBER ping
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  timeoutSeconds: 5
+  successThreshold: 1
+  failureThreshold: 5

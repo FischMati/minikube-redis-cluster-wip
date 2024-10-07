@@ -1,0 +1,52 @@
+sudo nginx -s reload
+ minikube start --network-plugin=cni --cni=flannel
+minikube start --cni=flannel
+
+ helm repo add bitnami https://charts.bitnami.com/bitnami
+
+helm repo update
+
+ 
+helm install my-redis-cluster bitnami/redis-cluster -f redis-values.yaml
+
+
+
+lsof -i :8080
+
+
+
+pod temporal
+redis-cli -h my-redis-cluster
+
+
+
+helm install my-redis-cluster bitnami/redis-cluster \
+  --set cluster.enabled=true \
+  --set cluster.nodes=3 \
+  --set cluster.replicas=2 \
+  --set cluster.totalNodes=9 \
+  --set usePassword=false 
+
+helm upgrade my-redis-cluster bitnami/redis-cluster \
+  --set cluster.enabled=true \
+  --set cluster.nodes=3 \
+  --set cluster.replicas=2 \
+  --set cluster.totalNodes=9 \
+  --set usePassword=false \
+  --set persistence.enabled=false
+
+
+  helm upgrade my-redis-cluster bitnami/redis-cluster \
+  --set cluster.enabled=true \
+  --set cluster.nodes=3 \
+  --set cluster.replicas=2 \
+  --set cluster.totalNodes=9 \
+  --set usePassword=false \
+  --set persistence.enabled=true \
+  --set redis.customLivenessProbe.exec.command[0]=sh \
+  --set redis.customLivenessProbe.exec.command[1]=-c \
+  --set redis.customLivenessProbe.exec.command[2]="redis-cli -h localhost -p \$REDIS_PORT_NUMBER ping" \
+  --set redis.customReadinessProbe.exec.command[0]=sh \
+  --set redis.customReadinessProbe.exec.command[1]=-c \
+  --set redis.customReadinessProbe.exec.command[2]="redis-cli -h localhost -p \$REDIS_PORT_NUMBER ping"
+  --namespace=redis-cluster --create-namespace
