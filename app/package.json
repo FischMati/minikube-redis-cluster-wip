@@ -14,8 +14,10 @@
   "description": "",
   "dependencies": {
     "@types/express": "^5.0.0",
+    "@types/mongoose": "^5.11.96",
     "express": "^4.21.0",
     "ioredis": "^5.4.1",
+    "mongoose": "^8.7.0",
     "pino": "^9.4.0",
     "pino-pretty": "^11.2.2",
     "ts-node": "^10.9.2",

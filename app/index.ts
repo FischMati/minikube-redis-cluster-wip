@@ -1,11 +1,15 @@
 import express from "express"
 import { createServer } from "http"
 import { RedisCluster } from "./redis-cluster";
+import { MongoDB } from "./MongoDB";
 
 
 async function main() {
   const cluster = new RedisCluster();
   await cluster.ping();
+
+  const dbSet = new MongoDB();
+  await dbSet.getReplicaSetInfo();
 
   const app = express();
 
