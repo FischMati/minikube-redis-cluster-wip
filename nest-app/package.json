@@ -12,7 +12,7 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "build:docker": "eval $(minikube docker-env) && docker build --no-cache --force-rm -t my-node-app .",
+    "build:docker": "eval $(minikube docker-env) && docker build --force-rm -t my-node-app .",
     "deploy": "pnpm run build:docker && kubectl rollout restart deployment/node-app",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
@@ -24,6 +24,7 @@
   "dependencies": {
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
+    "@nestjs/mongoose": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
     "ioredis": "^5.4.1",
     "mongoose": "^8.7.0",
