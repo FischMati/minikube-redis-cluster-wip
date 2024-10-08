@@ -15,7 +15,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
 
 
 RUN npm install -g typescript
-
+RUN npm install -g @nestjs/cli
 # Copia la configuración de Nginx (puedes personalizarla si lo necesitas)
 COPY nginx.conf /etc/nginx/nginx.conf
 

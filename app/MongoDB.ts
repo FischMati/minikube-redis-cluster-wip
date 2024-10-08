@@ -19,7 +19,6 @@ export class MongoDB {
   private async intitialize() {
     try {
       this.db = await mongoose.connect(uri);
-      await this.db.connection.asPromise()
       logger.info('Connected to MongoDB replica set');
     } catch (error) {
       logger.error('MongoDB connection error:', error);
