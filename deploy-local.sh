@@ -17,6 +17,6 @@ kubectl apply -f ./k8s
 
 # Deploy your Express app
 cd nest-app
-npm run deploy
+pnpm run deploy
 
 echo "Deployment complete!"
