@@ -16,7 +16,7 @@ helm install my-mongodb bitnami/mongodb --namespace mongodb -f charts/mongodb/va
 kubectl apply -f ./k8s
 
 # Deploy your Express app
-cd app
+cd nest-app
 npm run deploy
 
 echo "Deployment complete!"
