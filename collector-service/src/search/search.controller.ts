@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Req } from '@nestjs/common';
+import { Controller, Post, Body, Get } from '@nestjs/common';
 import { SearchService } from './search.service';
 
 @Controller('search')
@@ -8,5 +8,10 @@ export class SearchController {
   @Post()
   async createSearch(@Body('query') query: string) {
     return await this.searchService.saveSearch(query);
+  }
+
+  @Get()
+  async getAll() {
+    return await this.searchService.getAll();
   }
 }

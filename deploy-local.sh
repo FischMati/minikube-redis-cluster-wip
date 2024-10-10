@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Start Minikube with necessary configurations
-minikube start --driver=docker --network-plugin=cni --cni=flannel
+minikube start --driver=docker --cni=flannel
 
 # Create the namespace
 kubectl create namespace redis
@@ -19,6 +19,9 @@ kubectl apply -f ./k8s
 
 # Deploy your Express app
 cd nest-app
+pnpm run deploy
+
+cd ../collector-service
 pnpm run deploy
 
 echo "Deployment complete!"

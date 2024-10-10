@@ -14,6 +14,6 @@ const DEFAULT_URI = 'mongodb://mongodb-raw-queries.mongodbrq.svc.cluster.local:2
     MongooseModule.forFeature([{ name: 'Search', schema: SearchSchema }]), // Define los modelos a usar.
   ],
   providers: [SearchService],
-  controllers: [SearchController],
+  controllers: [SearchController]
 })
 export class SearchModule { }

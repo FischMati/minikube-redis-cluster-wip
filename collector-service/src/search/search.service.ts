@@ -23,4 +23,15 @@ export class SearchService {
       throw error;
     }
   }
+
+  async getAll(): Promise<SearchDocument[]> {
+    try {
+      const result = await this.searchModel.find().exec();
+      this.logger.log(`Fetched ${result.length} searches`);
+      return result;
+    } catch (error) {
+      this.logger.error('Error saving search:', error);
+      throw error;
+    }
+  }
 }
