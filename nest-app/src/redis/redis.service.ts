@@ -19,7 +19,7 @@ export class RedisService implements OnModuleInit {
   }
 
   async onModuleInit() {
-    if (this.redis.status !== 'ready' && this.redis.status !== 'connecting') {
+    if (this.redis.status !== 'ready' && this.redis.status !== 'connecting' && this.redis.status !== 'reconnecting') {
       await this.connect();
     } else {
       await this.printClusterInfo();

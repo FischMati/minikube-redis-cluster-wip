@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: collector-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: collector-service
+  template:
+    metadata:
+      labels:
+        app: collector-service
+    spec:
+      containers:
+      - name: collector-service
+        image: collector-service:latest  # Cambia esto por el nombre de tu imagen
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
